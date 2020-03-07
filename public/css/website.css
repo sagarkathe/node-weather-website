@@ -10,6 +10,9 @@ body {
     min-height: 100vh;
 }
 
+img {
+    width: 250px;
+}
 
 .main-content {
     flex-grow: 1;
