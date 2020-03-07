@@ -1,23 +1,19 @@
 const request = require('request');
 
 const forecast = (longitude, lattitude, callback) => {
-    console.log("^^^ ", longitude);
-    console.log("^^^ ", lattitude);
-    const url = "https://api.darksky.net/forecast/b3baee7667e3d22f17b843d1ef46debe/"+longitude+","+lattitude;
-    console.log("^^^ ", url);
+    const url = "https://api.darksky.net/forecast/b3baee7667e3d22f17b843d1ef46debe/" + longitude + "," + lattitude;
     request.get({
         url,
         json: true
-    }, function (err, {body}) {
-        //console.log("^^^ ", body);
+    }, function (err, {
+        body
+    }) {
         if (err) {
             callback(err, undefined);
         } else if (!body.currently) {
             callback("Invalid cordinates!! try with other", undefined);
         } else {
-            callback(undefined, {
-                temparature: body.currently.temperature
-            });
+            callback(undefined, body.daily.data[0].summary + "It is currently " + body.currently.temperature + " degress out. This high today is " + body.daily.data[0].temperatureHigh + " with low of  " + body.daily.data[0].temperatureLow + ". There is a " + body.currently.precipProbability + " chance of rain");
         }
     });
 }

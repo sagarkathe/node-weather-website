@@ -6,7 +6,6 @@ const geocode = (address, callback) => {
         url,
         json: true
     }, (error, {body}) => {
-        console.log("&&&&&&&&&&&&&&&&&&&", body)
         if (error) {
             callback(error, undefined);
         } else if (body.features.length === 0) {
